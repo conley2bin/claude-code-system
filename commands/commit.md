@@ -19,9 +19,6 @@ Analyze all staged and unstaged changes, then create a git commit with a well-fo
 
      <optional body>
 
-     🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-     Co-Authored-By: Claude <noreply@anthropic.com>
      ```
 
 3. **Commit Types:**
@@ -46,9 +43,6 @@ feat: add BytesIO-based audio streaming
 Implement memory-based audio capture to eliminate disk I/O.
 Recording data stored in BytesIO and directly streamed to Whisper API.
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
 ```
@@ -57,9 +51,6 @@ fix: use device native sample rate for recording
 Change from hardcoded 16000Hz to device's native 44100Hz
 to avoid "Invalid sample rate" error with USB microphone.
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
 ## Important:
