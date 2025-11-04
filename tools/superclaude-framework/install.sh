@@ -26,7 +26,7 @@
 #   • 深度研究和代码审查
 #
 # 【快速安装】
-npm install -g @bifrost_inc/superclaude && superclaude install
+pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install
 #
 # 【详细文档】
 #   GitHub: https://github.com/SuperClaude-Org/SuperClaude_Framework

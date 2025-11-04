@@ -32,8 +32,8 @@ The installer will:
 1. Install system-level `CLAUDE.md` to `~/.claude/CLAUDE.md`
 2. Prompt you to install optional tools:
    - Claude Code Templates (100+ templates)
+   - Claude Config Editor (config file cleanup tool)
    - SuperClaude Framework (meta-programming framework)
-   - Claude Code Workflows (automated review workflows)
 
 ---
 
@@ -45,19 +45,16 @@ claude-code-system/
 ├── install.sh                          # Main installation script
 ├── config/                             # Configuration files
 │   └── CLAUDE.md                       # System-level development guidelines
-├── tools/                              # Tool collection
-│   ├── claude-code-templates/
-│   │   ├── install.sh                  # Installation script
-│   │   └── README.md                   # Tool documentation
-│   ├── superclaude-framework/
-│   │   ├── install.sh
-│   │   └── README.md
-│   └── claude-code-workflows/
-│       ├── install.sh
-│       └── README.md
-├── docs/                               # Project documentation
-│   └── TOOLS_ECOSYSTEM.md              # Tools ecosystem overview
-└── claude-config-editor/               # Git submodule for config editing
+└── tools/                              # Tool collection
+    ├── claude-code-templates/
+    │   ├── install.sh                  # Installation script
+    │   └── README.md                   # Tool documentation
+    ├── claude-config-editor/
+    │   ├── install.sh
+    │   └── README.md
+    └── superclaude-framework/
+        ├── install.sh
+        └── README.md
 ```
 
 ---
@@ -70,8 +67,8 @@ claude-code-system/
 |------|------|---------|------------|------------------|
 | **System CLAUDE.md** | Required | Development guidelines | 0 | All projects |
 | **Claude Code Templates** | Optional | 100+ ready-to-use templates | 0 | Project initialization, template reference |
+| **Claude Config Editor** | Optional | Config file cleanup tool | 0 | Clean bloated config files |
 | **SuperClaude Framework** | Optional | Meta-programming framework | 30-40K/task | Complex problem solving, deep research |
-| **Claude Code Workflows** | Optional | Automated review workflows | 5-15K/trigger | CI/CD, automated code review |
 
 ### Detailed Information
 
@@ -95,7 +92,17 @@ Contains:
 
 📚 [Details](tools/claude-code-templates/README.md)
 
-#### 3. SuperClaude Framework *(Optional)*
+#### 3. Claude Config Editor *(Optional)*
+**Web-based configuration management**
+
+- Visual interface for config cleanup
+- Bulk project deletion (17 MB → 732 KB)
+- MCP server management
+- Auto-backup support
+
+🔧 [Details](tools/claude-config-editor/README.md)
+
+#### 4. SuperClaude Framework *(Optional)*
 **Meta-programming configuration framework**
 
 - 3 core plugins (PM Agent, Research, Index)
@@ -104,15 +111,6 @@ Contains:
 - 8 MCP server integrations
 
 🧠 [Details](tools/superclaude-framework/README.md)
-
-#### 4. Claude Code Workflows *(Optional)*
-**AI-driven automated review workflows**
-
-- Code Review Workflow
-- Security Review Workflow
-- Design Review Workflow
-
-⚙️ [Details](tools/claude-code-workflows/README.md)
 
 ---
 
@@ -132,11 +130,11 @@ If you skipped a tool during initial setup, you can install it manually:
 # Install Claude Code Templates
 ./tools/claude-code-templates/install.sh
 
+# Install Claude Config Editor
+./tools/claude-config-editor/install.sh
+
 # Install SuperClaude Framework
 ./tools/superclaude-framework/install.sh
-
-# Install Claude Code Workflows
-./tools/claude-code-workflows/install.sh
 ```
 
 ---
@@ -175,7 +173,6 @@ After installation:
    ```
 
 3. **Explore Tools**:
-   - Check `docs/TOOLS_ECOSYSTEM.md` for overview
    - Read individual tool READMEs for detailed usage
 
 4. **Configure Tools**:
@@ -208,7 +205,6 @@ This project is for personal use. Individual tools have their own licenses:
 ## 🔗 Resources
 
 - **Claude Code Official Docs**: https://docs.claude.com/claude-code
-- **Tool Ecosystem Guide**: [docs/TOOLS_ECOSYSTEM.md](docs/TOOLS_ECOSYSTEM.md)
 
 ---
 

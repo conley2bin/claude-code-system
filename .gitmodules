@@ -1,3 +1,0 @@
-[submodule "claude-config-editor"]
-	path = claude-config-editor
-	url = git@github.com:gagarinyury/claude-config-editor.git

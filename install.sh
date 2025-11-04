@@ -10,7 +10,7 @@
 #   1. System-level CLAUDE.md configuration (required)
 #   2. Claude Code Templates (optional, 100+ templates)
 #   3. SuperClaude Framework (optional, meta-programming framework)
-#   4. Claude Code Workflows (optional, automated review workflows)
+#   4. Claude Config Editor (optional, config file cleanup tool)
 #
 # Usage:
 #   chmod +x install.sh
@@ -38,7 +38,7 @@ echo ""
 # ============================================================================
 # Step 1: Install system-level CLAUDE.md
 # ============================================================================
-echo -e "${GREEN}[1/3]${NC} Installing system-level CLAUDE.md..."
+echo -e "${GREEN}[1/4]${NC} Installing system-level CLAUDE.md..."
 echo ""
 
 # Create ~/.claude directory
@@ -101,9 +101,39 @@ fi
 echo ""
 
 # ============================================================================
-# Step 3: Install SuperClaude Framework
+# Step 3: Install Claude Config Editor
 # ============================================================================
-echo -e "${GREEN}[3/4]${NC} SuperClaude Framework..."
+echo -e "${GREEN}[3/4]${NC} Claude Config Editor..."
+echo ""
+echo -e "${YELLOW}  Do you want to install Claude Config Editor? (y/n)${NC}"
+read -r install_config_editor
+
+if [[ "$install_config_editor" =~ ^[Yy]$ ]]; then
+    if [ -f "$SCRIPT_DIR/tools/claude-config-editor/install.sh" ]; then
+        chmod +x "$SCRIPT_DIR/tools/claude-config-editor/install.sh"
+
+        echo -e "${BLUE}  Executing Claude Config Editor installation script...${NC}"
+        echo ""
+
+        # Execute installation script
+        bash "$SCRIPT_DIR/tools/claude-config-editor/install.sh"
+
+        echo ""
+        echo -e "${GREEN}  Claude Config Editor installed successfully${NC}"
+    else
+        echo -e "${RED}  Error: Cannot find tools/claude-config-editor/install.sh${NC}"
+        exit 1
+    fi
+else
+    echo -e "${YELLOW}  Skipping Claude Config Editor installation...${NC}"
+fi
+
+echo ""
+
+# ============================================================================
+# Step 4: Install SuperClaude Framework
+# ============================================================================
+echo -e "${GREEN}[4/4]${NC} SuperClaude Framework..."
 echo ""
 echo -e "${YELLOW}  Do you want to install SuperClaude Framework? (y/n)${NC}"
 read -r install_superclaude
@@ -130,35 +160,6 @@ fi
 
 echo ""
 
-# ============================================================================
-# Step 4: Install Claude Code Workflows
-# ============================================================================
-echo -e "${GREEN}[4/4]${NC} Claude Code Workflows..."
-echo ""
-echo -e "${YELLOW}  Do you want to install Claude Code Workflows? (y/n)${NC}"
-read -r install_workflows
-
-if [[ "$install_workflows" =~ ^[Yy]$ ]]; then
-    if [ -f "$SCRIPT_DIR/tools/claude-code-workflows/install.sh" ]; then
-        chmod +x "$SCRIPT_DIR/tools/claude-code-workflows/install.sh"
-
-        echo -e "${BLUE}  Executing Claude Code Workflows installation script...${NC}"
-        echo ""
-
-        # Execute installation script
-        bash "$SCRIPT_DIR/tools/claude-code-workflows/install.sh"
-
-        echo ""
-        echo -e "${GREEN}  Claude Code Workflows installed successfully${NC}"
-    else
-        echo -e "${RED}  Error: Cannot find tools/claude-code-workflows/install.sh${NC}"
-        exit 1
-    fi
-else
-    echo -e "${YELLOW}  Skipping Claude Code Workflows installation...${NC}"
-fi
-
-echo ""
 
 # ============================================================================
 # Installation Complete
@@ -176,12 +177,12 @@ if [[ "$install_templates" =~ ^[Yy]$ ]]; then
     echo "  - Claude Code Templates (100+ template library)"
 fi
 
-if [[ "$install_superclaude" =~ ^[Yy]$ ]]; then
-    echo "  - SuperClaude Framework (meta-programming framework)"
+if [[ "$install_config_editor" =~ ^[Yy]$ ]]; then
+    echo "  - Claude Config Editor (config file cleanup tool)"
 fi
 
-if [[ "$install_workflows" =~ ^[Yy]$ ]]; then
-    echo "  - Claude Code Workflows (automated review workflows)"
+if [[ "$install_superclaude" =~ ^[Yy]$ ]]; then
+    echo "  - SuperClaude Framework (meta-programming framework)"
 fi
 
 echo ""
