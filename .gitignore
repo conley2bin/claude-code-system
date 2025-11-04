@@ -22,3 +22,6 @@ Thumbs.db
 # Temporary files
 tmp/
 temp/
+
+# Claude Config Editor (cloned to project root)
+/claude-config-editor/

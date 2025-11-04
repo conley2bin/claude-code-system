@@ -20,12 +20,11 @@
 #   • 零外部依赖,仅需 Python 3.7+
 #
 # 【安装位置】
-#   默认: ~/.local/share/claude-config-editor/
-#   可通过修改下方 INSTALL_DIR 变量自定义
+#   项目根目录: claude-config-editor/
 #
 # 【使用方法】
 #   安装后运行:
-#     python3 ~/.local/share/claude-config-editor/server.py
+#     python3 claude-config-editor/server.py
 #   然后浏览器打开:
 #     http://localhost:8080
 #
@@ -39,7 +38,10 @@ set -e
 
 # 配置
 REPO_URL="https://github.com/gagarinyury/claude-config-editor.git"
-INSTALL_DIR="$HOME/.local/share/claude-config-editor"
+# 获取项目根目录（脚本在 tools/claude-config-editor/，向上两级到根目录）
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+INSTALL_DIR="$PROJECT_ROOT/claude-config-editor"
 
 # 颜色定义
 RED='\033[0;31m'

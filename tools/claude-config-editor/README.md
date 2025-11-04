@@ -70,14 +70,14 @@ After using Claude Code for a few weeks:
 ```
 
 This will:
-1. Clone the repository to `~/.local/share/claude-config-editor/`
+1. Clone the repository to project root: `claude-config-editor/`
 2. Or update if already installed
 
 ### Usage
 
 ```bash
-# Start the web server
-python3 ~/.local/share/claude-config-editor/server.py
+# Start the web server (from project root)
+python3 claude-config-editor/server.py
 
 # Open your browser to:
 # http://localhost:8080
@@ -94,9 +94,9 @@ python3 ~/.local/share/claude-config-editor/server.py
 
 ## 📁 Installation Location
 
-**Default**: `~/.local/share/claude-config-editor/`
+**Location**: `claude-config-editor/` (in project root directory)
 
-You can customize this by editing the `INSTALL_DIR` variable in `install.sh`.
+The editor is cloned directly to the project root for easy access.
 
 ---
 
@@ -157,8 +157,8 @@ You can customize this by editing the `INSTALL_DIR` variable in `install.sh`.
 # 1. Install
 ./tools/claude-config-editor/install.sh
 
-# 2. Start server
-python3 ~/.local/share/claude-config-editor/server.py
+# 2. Start server (from project root)
+python3 claude-config-editor/server.py
 
 # 3. Open browser
 # Navigate to http://localhost:8080

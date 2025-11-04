@@ -45,16 +45,17 @@ claude-code-system/
 ├── install.sh                          # Main installation script
 ├── config/                             # Configuration files
 │   └── CLAUDE.md                       # System-level development guidelines
-└── tools/                              # Tool collection
-    ├── claude-code-templates/
-    │   ├── install.sh                  # Installation script
-    │   └── README.md                   # Tool documentation
-    ├── claude-config-editor/
-    │   ├── install.sh
-    │   └── README.md
-    └── superclaude-framework/
-        ├── install.sh
-        └── README.md
+├── tools/                              # Tool installation scripts & docs
+│   ├── claude-code-templates/
+│   │   ├── install.sh
+│   │   └── README.md
+│   ├── claude-config-editor/
+│   │   ├── install.sh
+│   │   └── README.md
+│   └── superclaude-framework/
+│       ├── install.sh
+│       └── README.md
+└── claude-config-editor/               # Config editor (cloned after install)
 ```
 
 ---
