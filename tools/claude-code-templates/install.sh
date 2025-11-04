@@ -66,7 +66,7 @@
 #
 # 【配置位置】~/.claude/agents/code-reviewer.md
 # ============================================================================
-npx claude-code-templates@latest --agent=development-tools/code-reviewer --yes
+# npx claude-code-templates@latest --agent=development-tools/code-reviewer --yes
 
 # ============================================================================
 # Slash Commands - 用户可输入的快捷命令
