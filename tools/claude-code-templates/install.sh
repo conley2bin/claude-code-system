@@ -66,7 +66,7 @@
 #
 # 【配置位置】~/.claude/agents/code-reviewer.md
 # ============================================================================
-# npx claude-code-templates@latest --agent=development-tools/code-reviewer --yes
+# npx claude-code-templates@latest --agent=development-tools/code-reviewer --directory ~ --yes
 
 # ============================================================================
 # Slash Commands - 用户可输入的快捷命令
@@ -94,15 +94,15 @@
 #
 # 【配置位置】~/.claude/commands/commit.md
 # ============================================================================
-npx claude-code-templates@latest --command=utilities/ultra-think --yes
-npx claude-code-templates@latest --command=documentation/create-architecture-documentation --yes
-npx claude-code-templates@latest --command=git-workflow/commit --yes
-npx claude-code-templates@latest --command=utilities/refactor-code --yes
-npx claude-code-templates@latest --command=utilities/code-review --yes
-npx claude-code-templates@latest --command=documentation/update-docs --yes
-npx claude-code-templates@latest --command=testing/generate-tests --yes
-npx claude-code-templates@latest --command=team/architecture-review --yes
-npx claude-code-templates@latest --command=project-management/todo --yes
+npx claude-code-templates@latest --command=utilities/ultra-think --directory ~ --yes
+npx claude-code-templates@latest --command=documentation/create-architecture-documentation --directory ~ --yes
+npx claude-code-templates@latest --command=git-workflow/commit --directory ~ --yes
+npx claude-code-templates@latest --command=utilities/refactor-code --directory ~ --yes
+npx claude-code-templates@latest --command=utilities/code-review --directory ~ --yes
+npx claude-code-templates@latest --command=documentation/update-docs --directory ~ --yes
+npx claude-code-templates@latest --command=testing/generate-tests --directory ~ --yes
+npx claude-code-templates@latest --command=team/architecture-review --directory ~ --yes
+npx claude-code-templates@latest --command=project-management/todo --directory ~ --yes
 
 # ============================================================================
 # Settings - Claude Code 行为配置
@@ -140,7 +140,7 @@ npx claude-code-templates@latest --command=project-management/todo --yes
 #     }
 #   }
 # ============================================================================
-npx claude-code-templates@latest --setting=statusline/context-monitor --yes
+npx claude-code-templates@latest --setting=statusline/context-monitor --directory ~ --yes
 
 # ============================================================================
 # Hooks - 事件触发的自动化脚本
@@ -191,7 +191,7 @@ npx claude-code-templates@latest --setting=statusline/context-monitor --yes
 #
 # 【配置位置】~/.claude/settings.json 中的 hooks 字段
 # ============================================================================
-npx claude-code-templates@latest --hook=automation/simple-notifications --yes
+# npx claude-code-templates@latest --hook=automation/simple-notifications --directory ~ --yes
 
 # ============================================================================
 # MCPs - Model Context Protocol 服务器
@@ -241,7 +241,7 @@ npx claude-code-templates@latest --hook=automation/simple-notifications --yes
 #
 # 【配置位置】~/.claude/settings.json 中的 mcpServers 字段
 # ============================================================================
-# npx claude-code-templates@latest --mcp=integration/memory-integration --yes
+# npx claude-code-templates@latest --mcp=integration/memory-integration --directory ~ --yes
 
 # ============================================================================
 # Plugins - 扩展功能包（非官方概念）
@@ -325,6 +325,6 @@ npx claude-code-templates@latest --hook=automation/simple-notifications --yes
 #   2. 是否是 Agent 的某项能力？
 #   3. 是否是 MCP 提供的工具？
 # ============================================================================
-# npx claude-code-templates@latest --skill=development/skill-creator --yes
+# npx claude-code-templates@latest --skill=development/skill-creator --directory ~ --yes
 
 
