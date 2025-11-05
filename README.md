@@ -30,10 +30,11 @@ chmod +x install.sh
 
 The installer will:
 1. Install system-level `CLAUDE.md` to `~/.claude/CLAUDE.md`
-2. Prompt you to install optional tools:
+2. Prompt you to install optional components:
+   - Custom Slash Commands (project-specific commands)
    - Claude Code Templates (100+ templates)
-   - Claude Config Editor (config file cleanup tool)
    - SuperClaude Framework (meta-programming framework)
+   - Claude Config Editor (config file cleanup tool)
 
 ---
 
@@ -45,6 +46,8 @@ claude-code-system/
 ├── install.sh                          # Main installation script
 ├── config/                             # Configuration files
 │   └── CLAUDE.md                       # System-level development guidelines
+├── commands/                           # Custom slash commands
+│   └── audit-compliance.md             # Code compliance audit command
 ├── tools/                              # Tool installation scripts & docs
 │   ├── claude-code-templates/
 │   │   ├── install.sh
@@ -60,16 +63,17 @@ claude-code-system/
 
 ---
 
-## 🛠️ Included Tools
+## 🛠️ Included Components
 
 ### Quick Comparison
 
-| Tool | Type | Purpose | Token Cost | Typical Use Case |
-|------|------|---------|------------|------------------|
+| Component | Type | Purpose | Token Cost | Typical Use Case |
+|-----------|------|---------|------------|------------------|
 | **System CLAUDE.md** | Required | Development guidelines | 0 | All projects |
+| **Custom Slash Commands** | Optional | Project-specific commands | 0 | Code compliance audit, custom workflows |
 | **Claude Code Templates** | Optional | 100+ ready-to-use templates | 0 | Project initialization, template reference |
-| **Claude Config Editor** | Optional | Config file cleanup tool | 0 | Clean bloated config files |
 | **SuperClaude Framework** | Optional | Meta-programming framework | 30-40K/task | Complex problem solving, deep research |
+| **Claude Config Editor** | Optional | Config file cleanup tool | 0 | Clean bloated config files |
 
 ### Detailed Information
 
@@ -83,7 +87,40 @@ Contains:
 - Communication Protocols
 - Architecture Patterns
 
-#### 2. Claude Code Templates *(Optional)*
+#### 2. Custom Slash Commands *(Optional)*
+**Project-specific command collection**
+
+Currently includes:
+
+**`/audit-compliance`** - Code compliance audit against CLAUDE.md principles
+
+**Features**:
+- 🔍 Dynamically extracts all principles from `~/.claude/CLAUDE.md` (zero hardcoded rules)
+- ✅ Two modes: Auto-fix (default) and Interactive (`--interactive`)
+- 🎯 Single Source of Truth: CLAUDE.md changes automatically reflect in audits
+- 📊 Baseline tracking for measuring compliance improvement
+
+**Usage**:
+```bash
+# Auto-fix all safe violations
+/audit-compliance
+
+# Interactive mode: review each change with before/after diff
+/audit-compliance --interactive
+
+# Focus on specific domain
+/audit-compliance --focus naming --interactive
+```
+
+**How it works**:
+- Parses `~/.claude/CLAUDE.md` markdown structure
+- Extracts Required Patterns (✅ CORRECT) and Forbidden Patterns (❌ WRONG)
+- Infers severity from keywords (MUST/NEVER → critical, SHOULD/AVOID → warning)
+- Uses Serena MCP for token-efficient symbolic code analysis
+
+**Installation**: Auto-installed to `~/.claude/commands/` during setup
+
+#### 3. Claude Code Templates *(Optional)*
 **100+ ready-to-use templates**
 
 - 48+ Agents (domain experts)
@@ -92,16 +129,6 @@ Contains:
 - Settings & Hooks
 
 📚 [Details](tools/claude-code-templates/README.md)
-
-#### 3. Claude Config Editor *(Optional)*
-**Web-based configuration management**
-
-- Visual interface for config cleanup
-- Bulk project deletion (17 MB → 732 KB)
-- MCP server management
-- Auto-backup support
-
-🔧 [Details](tools/claude-config-editor/README.md)
 
 #### 4. SuperClaude Framework *(Optional)*
 **Meta-programming configuration framework**
@@ -112,6 +139,16 @@ Contains:
 - 8 MCP server integrations
 
 🧠 [Details](tools/superclaude-framework/README.md)
+
+#### 5. Claude Config Editor *(Optional)*
+**Web-based configuration management**
+
+- Visual interface for config cleanup
+- Bulk project deletion (17 MB → 732 KB)
+- MCP server management
+- Auto-backup support
+
+🔧 [Details](tools/claude-config-editor/README.md)
 
 ---
 

@@ -11,6 +11,7 @@
 #   2. Claude Code Templates (optional, 100+ templates)
 #   3. SuperClaude Framework (optional, meta-programming framework)
 #   4. Claude Config Editor (optional, config file cleanup tool)
+#   5. Custom Slash Commands (optional, project-specific commands)
 #
 # Usage:
 #   chmod +x install.sh
@@ -71,9 +72,47 @@ fi
 echo ""
 
 # ============================================================================
-# Step 2: Install Claude Code Templates
+# Step 2: Install Custom Slash Commands
 # ============================================================================
-echo -e "${GREEN}[2/4]${NC} Claude Code Templates..."
+echo -e "${GREEN}[2/5]${NC} Custom Slash Commands..."
+echo ""
+
+if [ -d "$SCRIPT_DIR/commands" ] && [ "$(ls -A $SCRIPT_DIR/commands/*.md 2>/dev/null)" ]; then
+    echo -e "${BLUE}  Found custom slash commands in commands/ directory${NC}"
+    echo -e "${YELLOW}  Do you want to install custom slash commands? (y/n)${NC}"
+    read -r install_commands
+
+    if [[ "$install_commands" =~ ^[Yy]$ ]]; then
+        # Create ~/.claude/commands directory if it doesn't exist
+        mkdir -p ~/.claude/commands
+
+        # Count .md files (excluding README.md)
+        command_count=$(find "$SCRIPT_DIR/commands" -maxdepth 1 -name "*.md" ! -name "README.md" | wc -l)
+
+        if [ "$command_count" -gt 0 ]; then
+            echo -e "${BLUE}  Installing $command_count custom slash command(s)...${NC}"
+
+            # Copy all .md files except README.md, overwriting if exists
+            find "$SCRIPT_DIR/commands" -maxdepth 1 -name "*.md" ! -name "README.md" -exec cp {} ~/.claude/commands/ \;
+
+            echo -e "${GREEN}  Custom slash commands installed successfully${NC}"
+            echo -e "${BLUE}  Installed to: ~/.claude/commands/${NC}"
+        else
+            echo -e "${YELLOW}  No custom slash commands found (excluding README.md)${NC}"
+        fi
+    else
+        echo -e "${YELLOW}  Skipping custom slash commands installation...${NC}"
+    fi
+else
+    echo -e "${YELLOW}  No custom slash commands directory found, skipping...${NC}"
+fi
+
+echo ""
+
+# ============================================================================
+# Step 3: Install Claude Code Templates
+# ============================================================================
+echo -e "${GREEN}[3/5]${NC} Claude Code Templates..."
 echo ""
 echo -e "${YELLOW}  Do you want to install Claude Code Templates? (y/n)${NC}"
 read -r install_templates
@@ -114,9 +153,9 @@ fi
 echo ""
 
 # ============================================================================
-# Step 3: Install SuperClaude Framework
+# Step 4: Install SuperClaude Framework
 # ============================================================================
-echo -e "${GREEN}[3/4]${NC} SuperClaude Framework..."
+echo -e "${GREEN}[4/5]${NC} SuperClaude Framework..."
 echo ""
 echo -e "${YELLOW}  Do you want to install SuperClaude Framework? (y/n)${NC}"
 read -r install_superclaude
@@ -144,9 +183,9 @@ fi
 echo ""
 
 # ============================================================================
-# Step 4: Install Claude Config Editor
+# Step 5: Install Claude Config Editor
 # ============================================================================
-echo -e "${GREEN}[4/4]${NC} Claude Config Editor..."
+echo -e "${GREEN}[5/5]${NC} Claude Config Editor..."
 echo ""
 echo -e "${YELLOW}  Do you want to install Claude Config Editor? (y/n)${NC}"
 read -r install_config_editor
@@ -186,6 +225,10 @@ echo "Installed components:"
 echo "  - System-level CLAUDE.md (~/.claude/CLAUDE.md)"
 
 # Show what was installed based on user choices
+if [[ "$install_commands" =~ ^[Yy]$ ]]; then
+    echo "  - Custom Slash Commands (project-specific commands)"
+fi
+
 if [[ "$install_templates" =~ ^[Yy]$ ]]; then
     echo "  - Claude Code Templates (100+ template library)"
 fi
