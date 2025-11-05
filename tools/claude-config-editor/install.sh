@@ -124,10 +124,6 @@ echo -e "${YELLOW}启动方式:${NC}"
 echo -e "  ${GREEN}python3 $INSTALL_DIR/server.py${NC}"
 echo ""
 
-echo -e "${YELLOW}然后在浏览器打开:${NC}"
-echo -e "  ${GREEN}http://localhost:8080${NC}"
-echo ""
-
 echo -e "${BLUE}首次使用提示:${NC}"
 echo "  1. 建议先点击 'Export Config' 导出配置备份"
 echo "  2. 查看项目大小排序,识别占用空间最大的项目"
