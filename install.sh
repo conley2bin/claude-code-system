@@ -88,6 +88,19 @@ if [[ "$install_templates" =~ ^[Yy]$ ]]; then
         # Execute installation script
         bash "$SCRIPT_DIR/tools/claude-code-templates/install.sh"
 
+        # Fix all relative paths to absolute paths in settings.local.json
+        if [ -f ~/.claude/settings.local.json ]; then
+            echo -e "${BLUE}  Fixing relative paths to absolute paths in settings...${NC}"
+
+            # Replace all .claude/ references with ~/.claude/
+            # Handles: "command": "python3 .claude/scripts/xxx.py"
+            #          "command": "bash .claude/hooks/xxx.sh"
+            #          Any other .claude/ references
+            sed -i.bak 's|"\([^"]*\)\.claude/|"\1~/.claude/|g' ~/.claude/settings.local.json
+
+            echo -e "${GREEN}  All relative paths fixed to absolute paths${NC}"
+        fi
+
         echo ""
         echo -e "${GREEN}  Claude Code Templates installed successfully${NC}"
     else
