@@ -25,3 +25,4 @@ temp/
 
 # Claude Config Editor (cloned to project root)
 /claude-config-editor/
+.serena/

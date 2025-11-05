@@ -59,7 +59,7 @@ constructor(parent) {
 
 **Key Practices**:
 - Use existing abstractions rather than reimplementing
-- Delete dead code aggressively
+- Delete dead code immediately and aggressively (see Dead Code Elimination below)
 - Avoid unnecessary instance variables
 - If writing too much code, the approach is probably wrong
 
@@ -108,85 +108,19 @@ class UserService {
 ### Dead Code Elimination
 **Core Concept**: Unused code is a liability - delete it immediately and aggressively.
 
-**Why Dead Code Hurts**:
-- Increases cognitive load when reading code
-- Creates confusion about what's actually used
-- Slows down refactoring and changes
-- May contain security vulnerabilities
-- Wastes runtime resources and memory
-
-**Types of Dead Code**:
+**Types to Delete**:
 ```
-// 1. Unreachable code
-function process() {
-    return result;
-    console.log("Never runs");  // DELETE THIS
-}
-
-// 2. Unused functions/classes
-class OldUserManager {  // Nobody calls this anymore
-    // DELETE ENTIRE CLASS
-}
-
-// 3. Commented-out code
-// function oldImplementation() {  // DELETE THIS
-//     ...
-// }
-
-// 4. Unused variables/imports
-import { NeverUsed } from 'lib';  // DELETE THIS
-const unusedVar = 42;             // DELETE THIS
+// Unreachable code, unused functions/classes, commented code
+// Unused variables/imports, unused configuration parameters
 ```
 
 **Best Practices**:
+- Don't comment out - delete (Git preserves history)
+- Write detailed commit messages explaining why
+- Use static analysis and code coverage tools
+- Monitor before deleting if uncertain (add logging, check after 1-2 weeks)
 
-**1. Delete Immediately**:
-- Don't comment out - delete
-- Don't "keep just in case" - delete
-- Version control (Git) preserves history
-
-**2. Write Detailed Commit Messages**:
-```bash
-git commit -m "Remove UserExporter class
-
-This class was created for a feature that was never released.
-Last used in commit abc123 (2023-01-15).
-No production usage found in logs.
-Can be restored from git history if needed."
-```
-
-**3. Use Tools**:
-- Static analysis to find unreachable code
-- Code coverage tools to identify unused functions
-- Production monitoring to verify what's actually called
-
-**4. Monitor Before Deleting** (if uncertain):
-- Add logging to suspected dead code
-- Check production logs after 1-2 weeks
-- If no hits, delete confidently
-
-**When to Be Cautious**:
-- Public APIs (may have external users)
-- Plugin systems (may be used by external code)
-- Framework code (may be called via reflection)
-
-**Remember**: Git is your safety net. Don't fear deletion - embrace it.
-
-### Architecture - Abstraction & Polymorphism
-
-**Never Handle Special Cases in Generic Code**:
-```
-// WRONG: Type checking
-if (type == "special") { handleSpecial() }
-
-// CORRECT: Polymorphism
-object.handle()  // Let each implementation provide its own behavior
-```
-
-**Key Guidelines**:
-- Base classes should not know about specific implementations
-- Adding new types should not require modifying existing generic code
-- Query capabilities through interface methods, not type checking
+**When to Be Cautious**: Public APIs, plugin systems, framework code (may be used externally)
 
 ## Communication Protocols
 
@@ -231,8 +165,7 @@ object.handle()  // Let each implementation provide its own behavior
 ### Study Before Modifying
 1. **Understand Existing Abstractions**: Find similar patterns
 2. **Follow Established Patterns**: Don't reinvent the wheel
-3. **Maintain Naming Consistency**: Align with existing code style
-4. **Read Related Tests**: Understand expected behavior
+3. **Read Related Tests**: Understand expected behavior
 
 ### Component Responsibility Separation
 - Each component has a specific purpose
@@ -252,6 +185,129 @@ object.handle()  // Let each implementation provide its own behavior
 - Avoid duplicating knowledge that exists elsewhere
 
 ## Architecture Patterns
+
+### Naming Principles
+**Core Concept**: Names should reveal intent, not implementation details.
+
+**Express Intent, Not Implementation**:
+```
+// WRONG: Implementation-focused
+getUserRolesFromDatabase()
+configMap.get("timeout")
+
+// CORRECT: Intent-focused
+getUserPermissions()
+getTimeout()
+```
+
+**Avoid Abbreviations**:
+```
+// WRONG: Cryptic abbreviations
+cfg, ctx, usr, mgr, svc
+
+// CORRECT: Clear full names
+configuration, context, user, manager, service
+
+// EXCEPTION: Universally known abbreviations are OK
+id, url, html, json, xml
+```
+
+**Boolean Predicates**:
+```
+// CORRECT: Clear predicates
+isEnabled(), hasPermission(), canEdit(), shouldRetry()
+
+// WRONG: Ambiguous names
+enabled(), permission(), edit(), retry()
+```
+
+**Key Guidelines**:
+- Reader should understand purpose without reading implementation
+- Longer descriptive names are better than short cryptic ones
+- Consistency matters: if you use `get` prefix, use it everywhere
+
+### Dependency Direction
+**Core Concept**: Dependencies should flow from concrete to abstract, from outer layers to inner layers.
+
+**High-Level Independence**:
+```
+// WRONG: Core logic depends on infrastructure
+class UserService {
+    private database: PostgreSQL  // Tight coupling to specific DB
+
+    getUser(id) {
+        return this.database.query("SELECT * FROM users WHERE id = ?", id)
+    }
+}
+
+// CORRECT: Core logic depends on abstraction
+class UserService {
+    private repository: UserRepository  // Abstract interface
+
+    getUser(id) {
+        return this.repository.findById(id)
+    }
+}
+```
+
+**Interface-Based Design**:
+```
+// Infrastructure implements interface
+class PostgresUserRepository implements UserRepository {
+    findById(id) { /* PostgreSQL-specific implementation */ }
+}
+
+// Easy to swap implementations
+class MongoUserRepository implements UserRepository {
+    findById(id) { /* MongoDB-specific implementation */ }
+}
+```
+
+**No Circular Dependencies**:
+```
+// WRONG: A needs B, B needs A
+class OrderService {
+    constructor(private paymentService: PaymentService) {}
+}
+class PaymentService {
+    constructor(private orderService: OrderService) {}  // Circular!
+}
+
+// CORRECT: Extract shared interface or third component
+interface PaymentEvents {
+    onPaymentComplete(orderId: string): void
+}
+
+class OrderService implements PaymentEvents {
+    onPaymentComplete(orderId) { /* handle */ }
+}
+
+class PaymentService {
+    constructor(private eventHandler: PaymentEvents) {}
+}
+```
+
+**Key Guidelines**:
+- Business logic should never import infrastructure code
+- If two modules depend on each other, extract a shared abstraction
+- Dependencies should form a directed acyclic graph (DAG), never cycles
+- Test whether you can replace implementation without changing core logic
+
+### Abstraction & Polymorphism
+
+**Never Handle Special Cases in Generic Code**:
+```
+// WRONG: Type checking
+if (type == "special") { handleSpecial() }
+
+// CORRECT: Polymorphism
+object.handle()  // Let each implementation provide its own behavior
+```
+
+**Key Guidelines**:
+- Base classes should not know about specific implementations
+- Adding new types should not require modifying existing generic code
+- Query capabilities through interface methods, not type checking
 
 ### Scientific/Engineering Mindset
 **Elegant and Clear, Not Defensive**:
@@ -277,22 +333,7 @@ result = processor.transform(validData)
 - **Vectorized Operations**: Think in tensors/arrays, not loops
 - **Function Pointers**: Assign functions at init, not runtime branching
 
-### Testing Philosophy
-- **Test Behavior, Not Implementation**
-- **Fast-Failing Tests**: Expose problems immediately
-- **Isolated Tests**: Each test runs independently
-- **Meaningful Assertions**: Test actual requirements
-
-## Key Lessons
-
-### Research Code Nature
-This is not production code, but research/development code:
-- Embrace breaking changes
-- Fail fast to expose problems
-- Focus on clarity over compatibility
-- Maintain a modern, clean codebase
-
-### Performance Principles
+## Performance Principles
 - **Measure Over Guess**: Profile first, optimize later
 - **Algorithms Over Micro-optimizations**: O(n) beats O(n²)
 - **Cache Compute-Intensive Operations**
@@ -301,8 +342,3 @@ This is not production code, but research/development code:
 ---
 
 **Remember**: These are principles, not rules. Use judgment, understand the reasoning, and apply wisely in context.
-
-
-
-
-
