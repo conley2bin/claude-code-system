@@ -140,7 +140,7 @@ npx claude-code-templates@latest --command=project-management/todo --directory ~
 #     }
 #   }
 # ============================================================================
-npx claude-code-templates@latest --setting=statusline/context-monitor --directory ~ --yes
+# npx claude-code-templates@latest --setting=statusline/context-monitor --directory ~ --yes
 
 # ============================================================================
 # Hooks - 事件触发的自动化脚本
