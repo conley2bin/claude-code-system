@@ -8,10 +8,10 @@
 #
 # Installation Includes:
 #   1. System-level CLAUDE.md configuration (required)
-#   2. Claude Code Templates (optional, 100+ templates)
-#   3. SuperClaude Framework (optional, meta-programming framework)
-#   4. Claude Config Editor (optional, config file cleanup tool)
-#   5. Custom Slash Commands (optional, project-specific commands)
+#   2. Custom Slash Commands (optional, project-specific commands)
+#   3. Claude Code Templates (optional, 100+ templates)
+#   4. SuperClaude Framework (optional, meta-programming framework)
+#   5. Claude Config Editor (optional, config file cleanup tool)
 #
 # Usage:
 #   chmod +x install.sh

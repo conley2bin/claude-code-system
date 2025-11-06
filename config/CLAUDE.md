@@ -54,6 +54,65 @@ constructor(parent) {
 }
 ```
 
+### DRY Principle (Don't Repeat Yourself)
+**Core Concept**: Every piece of knowledge should have a single, unambiguous representation in the system.
+
+**Why It Matters**:
+- Duplicate code means duplicate bugs
+- Changes must be made in multiple places
+- Increased maintenance burden
+- Higher risk of inconsistency
+
+**What to Apply DRY to**:
+```
+// WRONG: Duplicate business logic
+class OrderService {
+    calculateTotal(items) {
+        let total = 0
+        for (item of items) {
+            total += item.price * item.quantity * (1 - item.discount)
+        }
+        return total
+    }
+}
+
+class InvoiceService {
+    calculateTotal(items) {
+        let total = 0
+        for (item of items) {
+            total += item.price * item.quantity * (1 - item.discount)
+        }
+        return total
+    }
+}
+
+// CORRECT: Extract to shared utility
+class PriceCalculator {
+    static calculateTotal(items) {
+        return items.reduce((sum, item) =>
+            sum + item.price * item.quantity * (1 - item.discount), 0
+        )
+    }
+}
+```
+
+**When NOT to Apply DRY**:
+- Coincidental similarity (different domains, might diverge)
+- Copy-paste until third occurrence (wait for patterns to emerge)
+- Performance-critical code (sometimes duplication is faster)
+
+**Key Distinctions**:
+- ✅ Extract duplicate business logic
+- ✅ Consolidate duplicate algorithms
+- ✅ Unify duplicate data transformations
+- ❌ Don't abstract prematurely (see YAGNI)
+- ❌ Don't force unification of coincidental similarity
+
+**Relationship with Other Principles**:
+- **DRY** focuses on eliminating duplicate knowledge/logic
+- **Single Source of Truth** focuses on eliminating duplicate state/data
+- **Minimal Code** is the outcome of applying DRY and SSOT
+
 ### Minimal Code Principle
 **Core Concept**: Less is more - every line of code is a liability.
 
