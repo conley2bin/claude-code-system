@@ -58,8 +58,8 @@ Fix this? (y/n/skip-all): y
 
 ## Behavioral Flow
 1. **Parse CLAUDE.md**: Read ~/.claude/CLAUDE.md and dynamically extract all principles, patterns, and rules
-   - Identify "Required Patterns" (✅ correct examples)
-   - Identify "Forbidden Patterns" (❌ anti-patterns to avoid)
+   - Identify "Required Patterns" (correct examples)
+   - Identify "Forbidden Patterns" (anti-patterns to avoid)
    - Extract principle names and descriptions from section headers
 2. **Build Checkers**: Dynamically construct validation rules based on parsed principles
    - Create pattern matchers for each required/forbidden pattern

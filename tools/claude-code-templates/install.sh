@@ -96,7 +96,6 @@ npx claude-code-templates@latest --agent=ai-specialists/prompt-engineer --direct
 # ============================================================================
 npx claude-code-templates@latest --command=utilities/ultra-think --directory ~ --yes
 npx claude-code-templates@latest --command=documentation/create-architecture-documentation --directory ~ --yes
-npx claude-code-templates@latest --command=git-workflow/commit --directory ~ --yes
 npx claude-code-templates@latest --command=utilities/refactor-code --directory ~ --yes
 npx claude-code-templates@latest --command=utilities/code-review --directory ~ --yes
 npx claude-code-templates@latest --command=documentation/update-docs --directory ~ --yes
