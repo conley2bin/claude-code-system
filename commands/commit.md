@@ -6,9 +6,15 @@ description: Create well-formatted commits with conventional commit format
 
 # Smart Git Commit
 
-CRITICAL: NEVER create commits automatically. Only commit when:
-1. User explicitly runs this /commit command, OR
-2. User explicitly requests "create a commit" or "commit these changes"
+CRITICAL: NEVER create commits automatically.
+
+ONLY commit when:
+1. User explicitly runs /commit command
+2. User explicitly requests "commit" or "create a commit"
+
+Default behavior: Do not commit. If uncertain, do not commit.
+
+---
 
 Create well-formatted commit: $ARGUMENTS
 
@@ -23,7 +29,7 @@ Create well-formatted commit: $ARGUMENTS
 ## What This Command Does
 
 1. Checks which files are staged with `git status`
-2. If 0 files are staged, automatically adds all modified and new files with `git add`
+2. If 0 files are staged, automatically adds all modified files with `git add -u` (tracked files only)
 3. Performs a `git diff` to understand what changes are being committed
 4. Analyzes the diff to determine if multiple distinct logical changes are present
 5. If multiple distinct changes are detected, suggests breaking the commit into multiple smaller commits
@@ -102,9 +108,8 @@ Example of splitting commits:
 
 ## Important Notes
 
-- CRITICAL: NEVER commit automatically. Only commit when user explicitly requests it via this command or direct instruction.
 - If specific files are already staged, the command will only commit those files
-- If no files are staged, it will automatically stage all modified and new files
+- If no files are staged, it will automatically stage all modified files (tracked files only, using `git add -u`)
 - The commit message will be constructed based on the changes detected
 - Before committing, the command will review the diff to identify if multiple commits would be more appropriate
 - If suggesting multiple commits, it will help you stage and commit the changes separately
