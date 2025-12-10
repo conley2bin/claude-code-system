@@ -1,249 +1,154 @@
 # Claude Code System
 
-> Personal Claude Code configuration collection for quick setup on new devices
+Personal Claude Code configuration collection for quick setup on new devices.
 
-A comprehensive toolkit that streamlines Claude Code configuration across multiple machines, featuring system-level development guidelines and automated installation of popular Claude Code tools.
+Comprehensive toolkit streamlining Claude Code configuration across machines: system-level development guidelines + automated tool installation.
 
----
+## Features
 
-## 🎯 Features
+- System-level CLAUDE.md: Standardized development principles
+- Tool integration: Claude Code ecosystem installation
+- Interactive setup: Select tools during installation
+- Backup protection: Optional configuration backup
+- Quick deploy: One-command installation
 
-- ✅ **System-Level Configuration**: Standardized CLAUDE.md development guidelines
-- ✅ **Tool Integration**: Easy installation of Claude Code ecosystem tools
-- ✅ **Interactive Setup**: Choose which tools to install during setup
-- ✅ **Backup Protection**: Optional backup of existing configuration
-- ✅ **Quick Deploy**: One-command installation on new devices
-
----
-
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
-# Clone the repository
 git clone <repository-url>
 cd claude-code-system
-
-# Run installation
 chmod +x install.sh
 ./install.sh
 ```
 
-The installer will:
-1. Install system-level `CLAUDE.md` to `~/.claude/CLAUDE.md`
-2. Prompt you to install optional components:
-   - Custom Slash Commands (project-specific commands)
+Installer actions:
+1. Installs system-level CLAUDE.md to ~/.claude/CLAUDE.md
+2. Prompts for optional components:
+   - Custom Slash Commands
    - Claude Code Templates (100+ templates)
-   - SuperClaude Framework (meta-programming framework)
-   - Claude Config Editor (config file cleanup tool)
+   - SuperClaude Framework
+   - Claude Config Editor
 
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 claude-code-system/
-├── README.md                           # Project documentation
-├── install.sh                          # Main installation script
-├── config/                             # Configuration files
-│   └── CLAUDE.md                       # System-level development guidelines
-├── commands/                           # Custom slash commands
-│   └── audit-compliance.md             # Code compliance audit command
-├── tools/                              # Tool installation scripts & docs
+├── config/
+│   └── CLAUDE.md              # System-level guidelines
+├── commands/                  # Slash commands
+│   ├── audit-compliance.md
+│   ├── commit.md
+│   └── remind.md
+├── tools/                     # Installation scripts
 │   ├── claude-code-templates/
-│   │   ├── install.sh
-│   │   └── README.md
 │   ├── claude-config-editor/
-│   │   ├── install.sh
-│   │   └── README.md
 │   └── superclaude-framework/
-│       ├── install.sh
-│       └── README.md
-└── claude-config-editor/               # Config editor (cloned after install)
+└── install.sh                 # Main installer
 ```
 
----
+## Included Components
 
-## 🛠️ Included Components
+| Component | Type | Purpose | Token Cost |
+|-----------|------|---------|------------|
+| System CLAUDE.md | Required | Development guidelines | 0 |
+| Custom Slash Commands | Optional | Workflow automation | 0 |
+| Claude Code Templates | Optional | 100+ templates | 0 |
+| SuperClaude Framework | Optional | Meta-programming | 30-40K/task |
+| Claude Config Editor | Optional | Config cleanup | 0 |
 
-### Quick Comparison
+### 1. System-Level CLAUDE.md (Required)
 
-| Component | Type | Purpose | Token Cost | Typical Use Case |
-|-----------|------|---------|------------|------------------|
-| **System CLAUDE.md** | Required | Development guidelines | 0 | All projects |
-| **Custom Slash Commands** | Optional | Project-specific commands | 0 | Code compliance audit, custom workflows |
-| **Claude Code Templates** | Optional | 100+ ready-to-use templates | 0 | Project initialization, template reference |
-| **SuperClaude Framework** | Optional | Meta-programming framework | 30-40K/task | Complex problem solving, deep research |
-| **Claude Config Editor** | Optional | Config file cleanup tool | 0 | Clean bloated config files |
-
-### Detailed Information
-
-#### 1. System-Level CLAUDE.md
-**Required** - Development guidelines and principles
-
-Contains:
+Development guidelines:
 - Fail-Fast Principle
 - Single Source of Truth
 - Minimal Code Principle
-- Communication Protocols
-- Architecture Patterns
+- DRY / YAGNI Principles
+- Communication protocols
 
-#### 2. Custom Slash Commands *(Optional)*
-**Project-specific command collection**
+### 2. Custom Slash Commands (Optional)
 
-Currently includes:
+**`/audit-compliance`** - Code compliance audit
 
-**`/audit-compliance`** - Code compliance audit against CLAUDE.md principles
+Dynamically extracts principles from ~/.claude/CLAUDE.md:
+- Parses markdown structure (Required/Forbidden patterns)
+- Infers severity from keywords (MUST/NEVER → critical)
+- Two modes: Auto-fix (default) or Interactive
+- Serena MCP integration for symbolic analysis
 
-**Features**:
-- 🔍 Dynamically extracts all principles from `~/.claude/CLAUDE.md` (zero hardcoded rules)
-- ✅ Two modes: Auto-fix (default) and Interactive (`--interactive`)
-- 🎯 Single Source of Truth: CLAUDE.md changes automatically reflect in audits
-- 📊 Baseline tracking for measuring compliance improvement
-
-**Usage**:
+Usage:
 ```bash
-# Auto-fix all safe violations
-/audit-compliance
-
-# Interactive mode: review each change with before/after diff
-/audit-compliance --interactive
-
-# Focus on specific domain
-/audit-compliance --focus naming --interactive
+/audit-compliance                         # Auto-fix violations
+/audit-compliance --interactive           # Review each change
+/audit-compliance --focus naming          # Specific domain
+/audit-compliance --baseline              # Track progress
 ```
 
-**How it works**:
-- Parses `~/.claude/CLAUDE.md` markdown structure
-- Extracts Required Patterns (✅ CORRECT) and Forbidden Patterns (❌ WRONG)
-- Infers severity from keywords (MUST/NEVER → critical, SHOULD/AVOID → warning)
-- Uses Serena MCP for token-efficient symbolic code analysis
+**`/commit`** - Conventional commit formatting
 
-**Installation**: Auto-installed to `~/.claude/commands/` during setup
+Creates well-formatted commits using conventional commit format.
 
-#### 3. Claude Code Templates *(Optional)*
-**100+ ready-to-use templates**
+**`/remind`** - Load CLAUDE.md guidelines
 
-- 48+ Agents (domain experts)
-- 21+ Commands (slash commands)
-- MCPs (external service integrations)
-- Settings & Hooks
+Loads system-level development guidelines into session context.
 
-📚 [Details](tools/claude-code-templates/README.md)
+### 3. Claude Code Templates (Optional)
 
-#### 4. SuperClaude Framework *(Optional)*
-**Meta-programming configuration framework**
+100+ ready-to-use templates:
+- 48+ specialized agents
+- 21+ slash commands
+- MCP integrations
+- Settings/hooks
 
+Details: tools/claude-code-templates/README.md
+
+### 4. SuperClaude Framework (Optional)
+
+Meta-programming framework:
 - 3 core plugins (PM Agent, Research, Index)
 - 16 intelligent agents
 - 7 operation modes
 - 8 MCP server integrations
 
-🧠 [Details](tools/superclaude-framework/README.md)
+Details: tools/superclaude-framework/README.md
 
-#### 5. Claude Config Editor *(Optional)*
-**Web-based configuration management**
+### 5. Claude Config Editor (Optional)
 
+Web-based configuration management:
 - Visual interface for config cleanup
-- Bulk project deletion (17 MB → 732 KB)
+- Bulk project deletion (17 MB → 732 KB reduction)
 - MCP server management
 - Auto-backup support
 
-🔧 [Details](tools/claude-config-editor/README.md)
+Details: tools/claude-config-editor/README.md
 
----
+## Manual Tool Installation
 
-## 📖 Documentation
-
-All documentation is contained in this README and individual tool documentation:
-- **This README**: Project overview, quick start, tools comparison
-- **Individual Tool Docs**: See `tools/<tool-name>/README.md` for detailed usage
-
----
-
-## 🔧 Manual Tool Installation
-
-If you skipped a tool during initial setup, you can install it manually:
+Install skipped tools manually:
 
 ```bash
-# Install Claude Code Templates
 ./tools/claude-code-templates/install.sh
-
-# Install Claude Config Editor
 ./tools/claude-config-editor/install.sh
-
-# Install SuperClaude Framework
 ./tools/superclaude-framework/install.sh
 ```
 
----
+## Configuration
 
-## ⚠️ Important Notes
+**Priority hierarchy:**
+- System-level: ~/.claude/CLAUDE.md (all projects)
+- Project-level: <project>/CLAUDE.md (overrides system)
 
-### Backup Recommendation
-
-The installer will prompt you to backup existing `~/.claude/CLAUDE.md` if found. You can also backup manually:
-
+**Backup:**
 ```bash
 cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.backup.$(date +%Y%m%d)
 ```
 
-### Configuration Priority
+**Verification:**
+```bash
+ls -la ~/.claude/CLAUDE.md
+```
 
-- **System-level**: `~/.claude/CLAUDE.md` (applies to all projects)
-- **Project-level**: `<project>/CLAUDE.md` (overrides system-level)
+Restart Claude Code after installation to apply changes.
 
-### What Gets Overwritten
+## Resources
 
-Running the installer will overwrite:
-- `~/.claude/CLAUDE.md` (with optional backup)
-
----
-
-## 🎓 Usage
-
-After installation:
-
-1. **Restart Claude Code** to apply configuration changes
-
-2. **Verify Installation**:
-   ```bash
-   ls -la ~/.claude/CLAUDE.md
-   ```
-
-3. **Explore Tools**:
-   - Read individual tool READMEs for detailed usage
-
-4. **Configure Tools**:
-   - Follow tool-specific documentation
-   - Customize as needed for your workflow
-
----
-
-## 🤝 Contributing
-
-This is a personal configuration collection, but suggestions are welcome:
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is for personal use. Individual tools have their own licenses:
-- Claude Code Templates: MIT-compatible
-- SuperClaude Framework: MIT
-- Claude Code Workflows: MIT
-
----
-
-## 🔗 Resources
-
-- **Claude Code Official Docs**: https://docs.claude.com/claude-code
-
----
-
-**Built with ❤️ for streamlined Claude Code setup**
+Claude Code Documentation: https://docs.claude.com/claude-code

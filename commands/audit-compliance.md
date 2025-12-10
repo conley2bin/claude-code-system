@@ -107,88 +107,65 @@ Key behaviors:
 
 ## Examples
 
-### Default: Auto-Fix Everything
-```
+**Default: Auto-Fix Everything**
+```bash
 /audit-compliance
-# Automatically fixes all safe violations
-# Shows summary:
-#   ✓ Fixed 12 naming violations
-#   ✓ Fixed 8 dead code issues
-#   ⚠ 5 error handling issues require manual review
-#
-#   Compliance Score: 78 → 89 (+11)
 ```
+Automatically fixes all safe violations. Shows summary:
+- Fixed 12 naming violations
+- Fixed 8 dead code issues
+- 5 error handling issues require manual review
+- Compliance Score: 78 → 89 (+11)
 
-### Interactive: Review Each Change
-```
+**Interactive: Review Each Change**
+```bash
 /audit-compliance --interactive
-# Shows each violation with before/after diff
-# User approves/rejects each fix individually
-#
-# [1/12] src/config/manager.ts:15
-# Principle: "Avoid Abbreviations"
-#
-# Before:  const cfg = getConfig()
-# After:   const configuration = getConfig()
-#
-# Fix this? (y/n/skip-all): y
-# ✓ Fixed
+```
+Shows each violation with before/after diff. User approves/rejects each fix:
+```
+[1/12] src/config/manager.ts:15
+Principle: "Avoid Abbreviations"
+
+Before:  const cfg = getConfig()
+After:   const configuration = getConfig()
+
+Fix this? (y/n/skip-all): y
+Fixed
 ```
 
-### Focus on Specific Domain
-```
-/audit-compliance --focus naming
-# Auto-fixes only naming-related violations
-
-/audit-compliance --focus naming --interactive
-# Interactive mode for naming violations only
+**Focus on Specific Domain**
+```bash
+/audit-compliance --focus naming                    # Auto-fix naming only
+/audit-compliance --focus naming --interactive      # Interactive naming fixes
 ```
 
-### Specific Directory or File
-```
-/audit-compliance src/
-# Auto-fix violations in src/ directory only
-
-/audit-compliance src/config/manager.ts --interactive
-# Interactive fix for single file
+**Specific Directory or File**
+```bash
+/audit-compliance src/                              # Directory scope
+/audit-compliance src/config/manager.ts --interactive  # Single file
 ```
 
-### Critical Issues Only
-```
-/audit-compliance --severity critical
-# Auto-fix only critical violations
-
-/audit-compliance --severity critical --interactive
-# Interactive mode for critical issues only
+**Critical Issues Only**
+```bash
+/audit-compliance --severity critical               # Auto-fix critical only
+/audit-compliance --severity critical --interactive # Interactive critical
 ```
 
-### Baseline and Progress Tracking
-```
-/audit-compliance --baseline
-# Saves compliance baseline to .claude/audit-baseline.json
-# Use for tracking improvement over time
-
-/audit-compliance --compare
-# Compares current state with baseline (requires existing baseline)
-# Shows compliance score delta and improvement metrics
-# If no baseline exists, will error and prompt to create one first
+**Baseline and Progress Tracking**
+```bash
+/audit-compliance --baseline    # Save baseline to .claude/audit-baseline.json
+/audit-compliance --compare     # Compare with baseline (requires existing baseline)
 ```
 
-### Report Generation
-```
-/audit-compliance --report
-# Generates detailed markdown report at .claude/compliance-report.md
-# Useful for documentation or sharing with team
-
-/audit-compliance --baseline --report
-# Can combine flags: saves baseline AND generates report
+**Report Generation**
+```bash
+/audit-compliance --report              # Generate .claude/compliance-report.md
+/audit-compliance --baseline --report   # Combine: baseline + report
 ```
 
-### Incremental Audit (Changed Files Only)
-```
-/audit-compliance --since HEAD~5
-# Only audits files changed in last 5 commits
-# Fast compliance check for recent changes
+**Incremental Audit**
+```bash
+/audit-compliance --since HEAD~5   # Only files changed in last 5 commits
 ```
 
 ## How Principles Are Detected (Dynamic Extraction)
@@ -343,12 +320,16 @@ Both modes require Claude Code Edit permission when modifying files:
    - **Double confirmation**: User approval + Claude Code permission
 
 ### What Can Be Auto-Fixed
-- ✅ **Naming violations**: `cfg` → `configuration`, `usr` → `user`
-- ✅ **Unused imports**: Remove unused import statements
-- ✅ **Dead code**: Remove unreferenced functions/variables (with confirmation)
-- ❌ **Architecture issues**: Circular dependencies (requires manual refactoring)
-- ❌ **Error handling**: Silent failures (requires logic changes)
-- ❌ **YAGNI violations**: Premature abstractions (requires judgment)
+
+Auto-fixable:
+- Naming violations: cfg → configuration, usr → user
+- Unused imports: Remove unused import statements
+- Dead code: Remove unreferenced functions/variables (with confirmation)
+
+Requires manual review:
+- Architecture issues: Circular dependencies
+- Error handling: Silent failures (logic changes)
+- YAGNI violations: Premature abstractions (judgment required)
 
 ## Boundaries
 
