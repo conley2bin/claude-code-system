@@ -7,12 +7,15 @@ description: Create well-formatted commits with conventional commit format
 # Smart Git Commit
 
 CRITICAL: NEVER create commits automatically.
+CRITICAL: NEVER modify the staging area when files are already staged.
 
 ONLY commit when:
 1. User explicitly runs /commit command
 2. User explicitly requests "commit" or "create a commit"
 
 Default behavior: Do not commit. If uncertain, do not commit.
+
+When files are already staged: Commit only what's staged. DO NOT add other files.
 
 ---
 
@@ -29,11 +32,12 @@ Create well-formatted commit: $ARGUMENTS
 ## What This Command Does
 
 1. Checks which files are staged with `git status`
-2. If 0 files are staged, automatically adds all modified files with `git add -u` (tracked files only)
-3. Performs a `git diff` to understand what changes are being committed
-4. Analyzes the diff to determine if multiple distinct logical changes are present
-5. If multiple distinct changes are detected, suggests breaking the commit into multiple smaller commits
-6. For each commit (or the single commit if not split), creates a commit message using conventional commit format
+2. **If files are already staged**: DO NOT modify staging area - commit only what's staged
+3. **If 0 files are staged**: Automatically adds all modified files with `git add -u` (tracked files only, excludes untracked files)
+4. Performs a `git diff` to understand what changes are being committed
+5. Analyzes the diff to determine if multiple distinct logical changes are present
+6. If multiple distinct changes are detected, suggests breaking the commit into multiple smaller commits
+7. For each commit (or the single commit if not split), creates a commit message using conventional commit format
 
 ## Best Practices for Commits
 
@@ -108,8 +112,8 @@ Example of splitting commits:
 
 ## Important Notes
 
-- If specific files are already staged, the command will only commit those files
-- If no files are staged, it will automatically stage all modified files (tracked files only, using `git add -u`)
+- **If specific files are already staged**: The command will ONLY commit those files and will NOT add any other files to staging area
+- **If no files are staged**: It will automatically stage all modified files (tracked files only, using `git add -u`) - untracked files are excluded
 - The commit message will be constructed based on the changes detected
 - Before committing, the command will review the diff to identify if multiple commits would be more appropriate
 - If suggesting multiple commits, it will help you stage and commit the changes separately
